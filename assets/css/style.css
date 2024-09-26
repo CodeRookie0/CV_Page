@@ -5,12 +5,25 @@
 
 :root {
 	--color-bg: #e0e0e0;
+	--color-bg-dark: #c0c0c0;
 	--color-text: #353535;
 	--color-text-secondary: #50514f;
 	--color-secondary: #2448e7;
 	--border-radius: 12px;
 	--box-shadow-light: 6px 6px 12px #bababa, -6px -6px 12px #ffffff;
 	--box-shadow-inset: inset 6px 6px 12px #bababa, inset -6px -6px 12px #ffffff;
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-secondary);
 }
 
 body {
@@ -75,6 +88,10 @@ nav {
 	display: flex;
 	align-items: center;
 	gap: 15px;
+}
+
+#menu-btn {
+	display: none;
 }
 
 #menu-btn,
@@ -144,8 +161,8 @@ nav {
 }
 
 .left h3,
-.left h1{
-	margin:0; 
+.left h1 {
+	margin: 0;
 }
 
 .left h1 span {
@@ -158,7 +175,7 @@ nav {
 	color: var(--color-secondary);
 }
 
-.left h3 span{
+.left h3 span {
 	font-size: 26px;
 }
 
@@ -269,4 +286,105 @@ nav {
 		transform: rotateX(0);
 		opacity: 1;
 	}
+}
+
+.experience {
+	background-color: var(--color-bg);
+	width: 80%;
+	height: 100vh;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.experience-header {
+	color: var(--color-secondary);
+	margin-bottom: 7vh;
+	align-items: center;
+	opacity: 0;
+	transform: translateX(20%);
+	transition: transform 1.5s ease, opacity 1s ease;
+}
+
+.experience-header.visible {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.experience-header p {
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 3vh;
+}
+
+.experience-header h1 span {
+	font-weight: 900;
+	font-size: 50px;
+	color: var(--color-secondary);
+}
+
+.experience-cards {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	overflow-x: auto;
+	padding: 20px 0;
+	margin-bottom: 80px;
+	scroll-snap-type: x mandatory;
+	opacity: 0;
+	transform: translateX(-10%);
+	transition: transform 1.5s ease, opacity 1.5s ease;
+}
+
+.experience-cards.visible {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.experience-cards::-webkit-scrollbar {
+	height: 8px;
+}
+
+.experience-cards::-webkit-scrollbar-track {
+	background: var(--color-bg-dark);
+}
+
+.experience-cards::-webkit-scrollbar-thumb {
+	background: var(--color-secondary);
+	border-radius: 5px;
+}
+
+.experience-card {
+	min-width: 600px;
+	background-color: white;
+	margin: 15px;
+	padding: 0 20px 15px;
+	border-radius: var(--border-radius);
+	box-shadow: var(--box-shadow-light);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	scroll-snap-align: center;
+	text-align: left;
+}
+
+.experience-card h3 {
+	font-size: 1.4rem;
+	color: var(--color-text-secondary);
+}
+
+.experience-card p {
+	font-size: 1rem;
+	color: var(--color-text-secondary);
+}
+
+.experience-card .description {
+	font-size: 1rem;
+	margin-top: 20px;
+	color: var(--color-text);
+}
+
+.experience-card:hover {
+	transform: translateY(-15px);
 }

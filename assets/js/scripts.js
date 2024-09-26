@@ -1,28 +1,76 @@
 document.addEventListener("DOMContentLoaded", function () {
 	const rightSection = document.querySelector(".right");
-	rightSection.classList.add("visible");
-
 	const headings = document.querySelectorAll(".left h3");
-	headings.forEach((heading) => {
-		heading.classList.add("visible");
-	});
-
 	const nameSpan = document.querySelector(".left h1");
 	const paragraph = document.querySelector(".left p");
-	nameSpan.classList.add("visible");
-	paragraph.classList.add("visible");
-
 	const cvDownload = document.querySelector(".cv-download");
-	cvDownload.classList.add("visible");
-
 	const socialButtons = document.querySelectorAll(".social-button");
-	setTimeout(() => {
-		socialButtons.forEach((button, index) => {
-			setTimeout(() => {
-				button.classList.add("visible");
-			}, 200 * index);
+
+	const observerOptions = {
+		root: null,
+		threshold: 0.1,
+	};
+
+	const homeSection = document.querySelector("#home");
+
+	const observerHome = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				rightSection.classList.add("visible");
+
+				headings.forEach((heading) => {
+					heading.classList.add("visible");
+				});
+
+				nameSpan.classList.add("visible");
+				paragraph.classList.add("visible");
+
+				cvDownload.classList.add("visible");
+
+				socialButtons.forEach((button, index) => {
+					setTimeout(() => {
+						button.classList.add("visible");
+					}, 200 * index);
+				});
+			} else {
+				rightSection.classList.remove("visible");
+
+				headings.forEach((heading) => {
+					heading.classList.remove("visible");
+				});
+
+				nameSpan.classList.remove("visible");
+				paragraph.classList.remove("visible");
+
+				cvDownload.classList.remove("visible");
+
+				socialButtons.forEach((button) => {
+					button.classList.remove("visible");
+				});
+			}
 		});
-	}, 800);
+	}, observerOptions);
+
+	observerHome.observe(homeSection);
+
+	const experienceHeader = document.querySelector(".experience-header");
+	const experienceCards = document.querySelector(".experience-cards");
+
+	const experienceSection = document.querySelector("#experience");
+
+	const observerExperience = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				experienceHeader.classList.add("visible");
+				experienceCards.classList.add("visible");
+			} else {
+				experienceHeader.classList.remove("visible");
+				experienceCards.classList.remove("visible");
+			}
+		});
+	}, observerOptions);
+
+	observerExperience.observe(experienceSection);
 });
 
 const texts = ["C# Developer", "Java Developer", "HTML Developer"];
